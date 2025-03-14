@@ -153,43 +153,46 @@ def q_and_a_manager():
 agent = q_and_a_manager()
 
 # --- Streamlit Interface ---
-
+def main():
 # Custom Header
-st.markdown("""
-    <div class="main-header">
-        <h1>Advanced Subject Teacher AI Agent</h1>
-        <p class="subtitle">Your ultimate source for in-depth subject explanations</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Sidebar: Display the workflow diagram in a larger original form.
-with st.sidebar:
-    st.subheader("Workflow Diagram")
-    try:
-        graph_img = agent.get_graph().draw_mermaid_png()
-        st.image(graph_img, caption="Workflow Diagram", use_container_width=True)
-    except Exception as e:
-        st.write("Could not display workflow diagram:", e)
-
-# Main chatbot interface.
-st.subheader("Chatbot")
-query = st.text_area("Ask me anything about Math, Physics, Chemistry, or Science:")
-
-if st.button("Get Answer"):
-    if query.strip():
+    st.markdown("""
+        <div class="main-header">
+            <h1>Advanced Subject Teacher AI Agent</h1>
+            <p class="subtitle">Your ultimate source for in-depth subject explanations</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Sidebar: Display the workflow diagram in a larger original form.
+    with st.sidebar:
+        st.subheader("Workflow Diagram")
         try:
-            # Prepare initial state
-            state = {
-                "topic": query,
-                "sections": [],
-                "completed_sections": [],
-                "final_report": ""
-            }
-            # Run the workflow
-            result = agent.invoke(state)
-            st.markdown("### 📌 Final Answer:")
-            st.markdown(result["final_report"])
+            graph_img = agent.get_graph().draw_mermaid_png()
+            st.image(graph_img, caption="Workflow Diagram", use_container_width=True)
         except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
-    else:
-        st.warning("Please enter a query before submitting.")
+            st.write("Could not display workflow diagram:", e)
+    
+    # Main chatbot interface.
+    st.subheader("Chatbot")
+    query = st.text_area("Ask me anything about Math, Physics, Chemistry, or Science:")
+    
+    if st.button("Get Answer"):
+        if query.strip():
+            try:
+                # Prepare initial state
+                state = {
+                    "topic": query,
+                    "sections": [],
+                    "completed_sections": [],
+                    "final_report": ""
+                }
+                # Run the workflow
+                result = agent.invoke(state)
+                st.markdown("### 📌 Final Answer:")
+                st.markdown(result["final_report"])
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
+        else:
+            st.warning("Please enter a query before submitting.")  
+
+if __name__ == "__main__":
+    main()
