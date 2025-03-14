@@ -1,4 +1,4 @@
-from demo.main import q_and_a_manager
+from demo import q_and_a_manager
 
 
 if __name__=="__main__":
