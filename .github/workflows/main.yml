@@ -1,7 +1,7 @@
 name: Sync to Hugging Face Space
 on:
   push:
-    branches: [main]
+    branches: [master]
 
   # to run this workflow manually from the Actions tab 
   workflow_dispatch:
@@ -21,6 +21,6 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://genaitiwari:$HF_TOKEN@huggingface.co/spaces/genaitiwari/agenticai main
+        run: git push --force https://genaitiwari:$HF_TOKEN@huggingface.co/spaces/Mohi117/AgenticAI main
        
          
