@@ -1,5 +1,5 @@
-from demo import q_and_a_manager
+from demo import main
 
 
 if __name__=="__main__":
-    q_and_a_manager()
+    main()
